@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Risk Map</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Live Risk Detector</h1>
+        <p>Checking your location against real-time satellite data</p>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="symptoms.html">Symptoms</a>
+            <a href="prevention.html">Prevention</a>
+            <a href="risk_checker.html">Risk Checker</a>
+            <a href="data_maps.html">Data & Maps</a>
+            <a href="live_map.html">Live Map</a>
+            <a href="notifications.html">Alerts</a>
+            <a href="faq.html">FAQ</a>
+        </nav>
+    </header>
+
+    <main class="content">
+        <section class="live-map-section">
+            <h2>Automatic Water Safety Check</h2>
+            <p style="text-align: center; max-width: 600px; margin: auto; margin-bottom: 2rem;">
+                Click the button below to use your device's location. We'll check it against our database of waterbodies
+                currently identified as high-risk by our simulated satellite monitoring system.
+            </p>
+            <div class="buttons">
+                <button class="btn" id="checkLocationBtn" onclick="checkLocation()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="white"
+                        style="vertical-align: middle; margin-right: 8px;">
+                        <path
+                            d="M12 2c-4.42 0-8 3.58-8 8 0 4.42 8 14 8 14s8-9.58 8-14c0-4.42-3.58-8-8-8zm0 11.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z" />
+                    </svg>
+                    Check My Location
+                </button>
+            </div>
+            <div id="liveResult" class="live-result-box">
+                Your safety status will appear here.
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Amoeba Awareness Project. Real-Time Safety, Powered by Data.</p>
+    </footer>
+
+    <script>
+        function checkLocation() {
+            const resultDiv = document.getElementById('liveResult');
+            const checkBtn = document.getElementById('checkLocationBtn');
+            resultDiv.className = 'live-result-box pending';
+            resultDiv.innerHTML = 'Accessing your location... Please grant permission.';
+            checkBtn.disabled = true;
+
+            // --- SIMULATED SATELLITE DATA ---
+            // In a real application, this would come from a server.
+            const hotspots = [
+                { name: "Whispering Pines Lake", lat: 34.0522, lon: -118.2437, risk: "High" }, // Los Angeles
+                { name: "Sunnydale Pond", lat: 29.7604, lon: -95.3698, risk: "High" },   // Houston
+                { name: "Blue Lagoon Hot Spring", lat: 25.7617, lon: -80.1918, risk: "Medium" } // Miami
+            ];
+
+            if (!navigator.geolocation) {
+                resultDiv.className = 'live-result-box error';
+                resultDiv.innerHTML = 'Geolocation is not supported by your browser.';
+                checkBtn.disabled = false;
+                return;
+            }
+
+            navigator.geolocation.getCurrentPosition(success, error);
+
+            function success(position) {
+                const userLat = position.coords.latitude;
+                const userLon = position.coords.longitude;
+                let nearHotspot = false;
+                let closestHotspotName = '';
+
+                for (const hotspot of hotspots) {
+                    const distance = getDistance(userLat, userLon, hotspot.lat, hotspot.lon);
+                    // Check if user is within ~50km of a hotspot
+                    if (distance < 50) {
+                        nearHotspot = true;
+                        closestHotspotName = hotspot.name;
+                        break;
+                    }
+                }
+
+                if (nearHotspot) {
+                    resultDiv.className = 'live-result-box error';
+                    resultDiv.innerHTML = `<strong>⚠️ WARNING:</strong> You are near a high-risk waterbody: <strong>${closestHotspotName}</strong>. Exercise extreme caution and follow all prevention guidelines.`;
+                } else {
+                    resultDiv.className = 'live-result-box success';
+                    resultDiv.innerHTML = `<strong>✅ ALL CLEAR:</strong> Your current location appears to be in a low-risk area. Enjoy the water safely!`;
+                }
+                checkBtn.disabled = false;
+            }
+
+            function error() {
+                resultDiv.className = 'live-result-box error';
+                resultDiv.innerHTML = 'Unable to retrieve your location. Please enable location services in your browser and try again.';
+                checkBtn.disabled = false;
+            }
+
+            // Haversine formula to calculate distance between two lat/lon points
+            function getDistance(lat1, lon1, lat2, lon2) {
+                const R = 6371; // Radius of the earth in km
+                const dLat = deg2rad(lat2 - lat1);
+                const dLon = deg2rad(lon2 - lon1);
+                const a =
+                    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+                    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+                const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+                return R * c; // Distance in km
+            }
+
+            function deg2rad(deg) {
+                return deg * (Math.PI / 180);
+            }
+        }
+    </script>
+</body>
+
+</html>

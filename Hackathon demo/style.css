@@ -1,0 +1,657 @@
+/* --- Professional Multi-Theme Style for Project A.W.A.R.E. --- */
+
+/* 1. Global Styles & Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #ecf0f1;
+    color: #34495e;
+    line-height: 1.7;
+}
+
+/* 2. Base Structure (Colors will be overridden by themes) */
+header {
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    font-size: 1.2rem;
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+nav {
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 50px;
+    display: inline-block;
+    padding: 0.5rem;
+    margin-top: 2rem;
+    backdrop-filter: blur(10px);
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    margin: 0 0.25rem;
+    border-radius: 30px;
+    font-weight: 400;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.content {
+    padding: 3rem 1rem;
+    max-width: 950px;
+    margin: auto;
+}
+
+h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+.card h3 {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.card-icon {
+    width: 28px;
+    height: 28px;
+}
+
+.buttons {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    margin: 0.5rem;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+footer {
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 4rem;
+}
+
+/* --- PAGE-SPECIFIC THEMES --- */
+
+/* Default/Home Theme (Slate Blue & Red) */
+body {
+    --theme-dark: #2c3e50;
+    --theme-accent: #c0392b;
+    --theme-secondary: #16a085;
+}
+
+header {
+    background: linear-gradient(45deg, #34495e, var(--theme-dark));
+}
+
+h2,
+h3 {
+    color: var(--theme-dark);
+}
+
+nav a:hover {
+    color: var(--theme-dark);
+}
+
+.card {
+    border-top: 4px solid var(--theme-accent);
+}
+
+.card-icon {
+    fill: var(--theme-accent);
+}
+
+.btn {
+    background: linear-gradient(45deg, var(--theme-secondary), #1abc9c);
+    box-shadow: 0 4px 15px rgba(22, 160, 133, 0.3);
+}
+
+.btn-secondary {
+    background: linear-gradient(45deg, var(--theme-accent), #e74c3c);
+    box-shadow: 0 4px 15px rgba(192, 57, 43, 0.3);
+}
+
+footer {
+    background-color: var(--theme-dark);
+}
+
+/* Symptoms Theme (Clinical Green) */
+.theme-symptoms {
+    --theme-dark: #27ae60;
+    --theme-accent: #2ecc71;
+    --theme-secondary: #0077b6;
+}
+
+.theme-symptoms header {
+    background: linear-gradient(45deg, #16a085, var(--theme-dark));
+}
+
+.theme-symptoms h2,
+.theme-symptoms h3 {
+    color: var(--theme-dark);
+}
+
+.theme-symptoms nav a:hover {
+    color: var(--theme-dark);
+}
+
+.theme-symptoms .card {
+    border-top-color: var(--theme-accent);
+}
+
+.theme-symptoms .card-icon {
+    fill: var(--theme-accent);
+}
+
+.theme-symptoms footer {
+    background-color: var(--theme-dark);
+}
+
+/* Prevention Theme (Calm Blue) */
+.theme-prevention {
+    --theme-dark: #2980b9;
+    --theme-accent: #3498db;
+    --theme-secondary: #16a085;
+}
+
+.theme-prevention header {
+    background: linear-gradient(45deg, #00b4d8, var(--theme-dark));
+}
+
+.theme-prevention h2,
+.theme-prevention h3 {
+    color: var(--theme-dark);
+}
+
+.theme-prevention nav a:hover {
+    color: var(--theme-dark);
+}
+
+.theme-prevention .card {
+    border-top-color: var(--theme-accent);
+}
+
+.theme-prevention .card-icon {
+    fill: var(--theme-accent);
+}
+
+.theme-prevention footer {
+    background-color: var(--theme-dark);
+}
+
+/* Risk Checker Theme (Caution Yellow/Orange) */
+.theme-risk-checker {
+    --theme-dark: #d35400;
+    --theme-accent: #f39c12;
+    --theme-secondary: #c0392b;
+}
+
+.theme-risk-checker header {
+    background: linear-gradient(45deg, #f39c12, var(--theme-dark));
+}
+
+.theme-risk-checker h2,
+.theme-risk-checker h3 {
+    color: var(--theme-dark);
+}
+
+.theme-risk-checker nav a:hover {
+    color: var(--theme-dark);
+}
+
+.theme-risk-checker .card {
+    border-top-color: var(--theme-accent);
+}
+
+.theme-risk-checker .card-icon {
+    fill: var(--theme-accent);
+}
+
+.theme-risk-checker footer {
+    background-color: var(--theme-dark);
+}
+
+/* Data & Maps Theme (Deep Purple/Tech) */
+.theme-datamaps {
+    --theme-dark: #8e44ad;
+    --theme-accent: #9b59b6;
+    --theme-secondary: #2980b9;
+}
+
+.theme-datamaps header {
+    background: linear-gradient(45deg, #4e54c8, var(--theme-dark));
+}
+
+.theme-datamaps h2,
+.theme-datamaps h3 {
+    color: var(--theme-dark);
+}
+
+.theme-datamaps nav a:hover {
+    color: var(--theme-dark);
+}
+
+.theme-datamaps .card {
+    border-top-color: var(--theme-accent);
+}
+
+.theme-datamaps .card-icon {
+    fill: var(--theme-accent);
+}
+
+.theme-datamaps footer {
+    background-color: var(--theme-dark);
+}
+
+/* Live Map Theme (Urgent Red) */
+.theme-livemap {
+    --theme-dark: #c0392b;
+    --theme-accent: #e74c3c;
+    --theme-secondary: #2980b9;
+}
+
+.theme-livemap header {
+    background: linear-gradient(45deg, #e74c3c, var(--theme-dark));
+}
+
+.theme-livemap h2,
+.theme-livemap h3 {
+    color: var(--theme-dark);
+}
+
+.theme-livemap nav a:hover {
+    color: var(--theme-dark);
+}
+
+.theme-livemap .card {
+    border-top-color: var(--theme-accent);
+}
+
+.theme-livemap .card-icon {
+    fill: var(--theme-accent);
+}
+
+.theme-livemap footer {
+    background-color: var(--theme-dark);
+}
+
+/* Notifications/Alerts Theme (Dark Red) */
+.theme-notifications {
+    --theme-dark: #922b21;
+    --theme-accent: #c0392b;
+    --theme-secondary: #7b241c;
+}
+
+.theme-notifications header {
+    background: linear-gradient(45deg, #c0392b, var(--theme-dark));
+}
+
+.theme-notifications h2,
+.theme-notifications h3 {
+    color: var(--theme-dark);
+}
+
+.theme-notifications nav a:hover {
+    color: var(--theme-dark);
+}
+
+.theme-notifications .card {
+    border-top-color: var(--theme-accent);
+}
+
+.theme-notifications .card-icon {
+    fill: var(--theme-accent);
+}
+
+.theme-notifications .btn-secondary {
+    background: linear-gradient(45deg, var(--theme-accent), var(--theme-dark));
+    box-shadow: 0 4px 15px rgba(192, 57, 43, 0.3);
+}
+
+.theme-notifications footer {
+    background-color: var(--theme-dark);
+}
+
+/* FAQ Theme (Neutral Gray) */
+.theme-faq {
+    --theme-dark: #7f8c8d;
+    --theme-accent: #95a5a6;
+    --theme-secondary: #2980b9;
+}
+
+.theme-faq header {
+    background: linear-gradient(45deg, #bdc3c7, var(--theme-dark));
+}
+
+.theme-faq h2,
+.theme-faq h3 {
+    color: var(--theme-dark);
+}
+
+.theme-faq nav a:hover {
+    color: var(--theme-dark);
+}
+
+.theme-faq .card {
+    border-top-color: var(--theme-accent);
+}
+
+.theme-faq .card-icon {
+    fill: var(--theme-accent);
+}
+
+.theme-faq footer {
+    background-color: var(--theme-dark);
+}
+
+/* News Page Theme (Journalistic Black & White) */
+.theme-news {
+    --theme-dark: #2c3e50;
+    --theme-accent: #34495e;
+    --theme-secondary: #7f8c8d;
+}
+
+.theme-news header {
+    background: linear-gradient(45deg, #7f8c8d, var(--theme-dark));
+}
+
+.theme-news h2,
+.theme-news h3 {
+    color: var(--theme-dark);
+}
+
+.theme-news nav a:hover {
+    color: var(--theme-dark);
+}
+
+.theme-news .card {
+    border-top-color: var(--theme-accent);
+}
+
+.theme-news .card-icon {
+    fill: var(--theme-accent);
+}
+
+.theme-news footer {
+    background-color: var(--theme-dark);
+}
+
+/* Styling for the news source text */
+.news-source {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #95a5a6;
+    margin-bottom: 0.5rem;
+    text-align: left;
+}
+
+/* Other styles */
+form {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+label {
+    font-weight: 600;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.2);
+}
+
+.result-box {
+    margin-top: 2rem;
+    padding: 2rem;
+    border-radius: 15px;
+    border: 2px solid #ccc;
+    background-color: #fff;
+    text-align: center;
+}
+
+.risk-title {
+    font-weight: bold;
+}
+
+.result-high {
+    border-color: #c0392b;
+    color: #c0392b;
+    background-color: #fbeae8;
+}
+
+.result-medium {
+    border-color: #f39c12;
+    color: #f39c12;
+    background-color: #fef5e7;
+}
+
+.result-low {
+    border-color: #16a085;
+    color: #16a085;
+    background-color: #e8f8f5;
+}
+
+.video-section {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.video-container {
+    max-width: 800px;
+    margin: auto;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+video {
+    display: block;
+    background-color: #000;
+}
+
+.live-map-section {
+    text-align: center;
+    background: #fff;
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.live-result-box {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid #ccc;
+}
+
+.live-result-box.pending {
+    background-color: #eaf6ff;
+    border-color: #34495e;
+    color: #34495e;
+}
+
+.live-result-box.success {
+    background-color: #e8f8f5;
+    border-color: #16a085;
+    color: #16a085;
+}
+
+.live-result-box.error {
+    background-color: #fbeae8;
+    border-color: #c0392b;
+    color: #c0392b;
+}
+
+.notification-banner {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 450px;
+    background-color: #fff;
+    color: #333;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: top 0.5s ease-in-out;
+}
+
+.notification-banner.show {
+    top: 20px;
+}
+
+.notification-icon {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+}
+
+.notification-text strong {
+    font-weight: 600;
+    display: block;
+}
+
+.notification-text p {
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.notification-close {
+    margin-left: auto;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.ask-question-section {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid #ddd;
+}
+
+.form-confirmation {
+    display: none;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: #e8f8f5;
+    color: #16a085;
+    border: 1px solid #16a085;
+    font-weight: 500;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.2rem;
+    }
+
+    nav {
+        width: 90%;
+    }
+
+    nav a {
+        display: block;
+        margin: 0.5rem 0;
+    }
+
+    .btn {
+        width: 80%;
+    }
+}

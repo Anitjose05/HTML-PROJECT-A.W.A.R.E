@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Waterbody Risk Prediction</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="theme-risk-checker">
+    <header>
+        <h1>Waterbody Safety Checker</h1>
+        <p>Estimate the risk of Naegleria fowleri presence based on environmental data</p>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="symptoms.html">Symptoms</a>
+            <a href="prevention.html">Prevention</a>
+            <a href="risk_checker.html">Risk Checker</a>
+            <a href="data_maps.html">Data & Maps</a>
+            <a href="live_map.html">Live Map</a>
+            <a href="notifications.html">Alerts</a>
+            <a href="news.html">News</a>
+            <a href="climate.html">Climate Impact</a>
+            <a href="about.html">About</a>
+            <a href="faq.html">FAQ</a>
+        </nav>
+    </header>
+    <main class="content">
+        <section>
+            <h2>Enter Environmental Details</h2>
+            <form id="predictionForm" onsubmit="predictRisk(event)">
+                <label for="location">Location Name (optional):</label>
+                <input type="text" id="location" placeholder="e.g., Lake Travis" />
+                <label for="temperature">Air Temperature (°C):</label>
+                <input type="number" id="temperature" required placeholder="e.g., 35" />
+                <label for="waterType">Waterbody Type:</label>
+                <select id="waterType" required>
+                    <option value="lake">Lake</option>
+                    <option value="pond">Pond</option>
+                    <option value="river">River</option>
+                    <option value="hot_spring">Hot Spring</option>
+                    <option value="canal">Canal</option>
+                </select>
+                <label for="movement">Water Movement:</label>
+                <select id="movement" required>
+                    <option value="still">Still / Stagnant</option>
+                    <option value="flowing">Slow Flowing</option>
+                    <option value="fast_flowing">Fast Flowing</option>
+                </select>
+                <label for="rain">Recent Heavy Rainfall (last 3 days)?</label>
+                <select id="rain" required>
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                </select>
+                <button class="btn" type="submit">Check Safety</button>
+            </form>
+        </section>
+        <div id="result" class="result-box"></div>
+    </main>
+    <footer>
+        <p>© 2025 Amoeba Awareness Project. Think Before You Swim.</p>
+    </footer>
+    <script>
+        function predictRisk(event) {
+            event.preventDefault();
+            const location = document.getElementById("location").value;
+            const temp = parseFloat(document.getElementById("temperature").value);
+            const waterType = document.getElementById("waterType").value;
+            const movement = document.getElementById("movement").value;
+            const rain = document.getElementById("rain").value;
+            let score = 0;
+            let riskLevel = "";
+            let riskMessage = "";
+            let riskClass = "";
+            if (temp >= 35) { score += 3; } else if (temp >= 28) { score += 2; }
+            if (movement === "still") { score += 2; } else if (movement === "flowing") { score += 1; }
+            if (waterType === "pond" || waterType === "lake" || waterType === "hot_spring") { score += 1; }
+            if (rain === "no") { score += 1; }
+            if (score >= 5) {
+                riskLevel = "High Risk";
+                riskClass = "result-high";
+                riskMessage = `Conditions are highly favorable for Naegleria fowleri growth. <strong>Swimming is not recommended.</strong>`;
+            } else if (score >= 3) {
+                riskLevel = "Medium Risk";
+                riskClass = "result-medium";
+                riskMessage = `Conditions may support the presence of Naegleria fowleri. <strong>Exercise extreme caution.</strong>`;
+            } else {
+                riskLevel = "Low Risk";
+                riskClass = "result-low";
+                riskMessage = `The current conditions are less favorable for the amoeba, but always be mindful.`;
+            }
+            const resultDiv = document.getElementById("result");
+            resultDiv.className = `result-box ${riskClass}`;
+            resultDiv.innerHTML = `<h3>🧪 Prediction Result</h3>
+                ${location ? `<p><strong>Location:</strong> ${location}</p>` : ""}
+                <p><strong>Calculated Risk Score:</strong> ${score}</p>
+                <hr style="margin: 1rem 0;">
+                <p><span class="risk-title">${riskLevel}:</span> ${riskMessage}</p>`;
+        }
+    </script>
+</body>
+
+</html>
